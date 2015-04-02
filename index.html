@@ -3,10 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <title>Roberto Rodriguez - Entrepreneur, Programmer, Founder.</title>
-  <link rel="stylesheet" href="builds/css/main.css">
+  <link rel="stylesheet" href="build/css/main.css">
 </head>
 <body>
-  <h1>Title</h1>
-  <script src="builds/js/index.js"></script>
+  <div id="docsContainer"></div>
+
+  <script id="docstpl" type="x-tmpl-mustache">
+    {{#Cats}}
+      <b>{{name}}</b>
+    {{/Cats}}
+  </script>
+
+  <script src="build/js/index.js"></script>
 </body>
 </html>
