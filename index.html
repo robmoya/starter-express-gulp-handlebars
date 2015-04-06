@@ -6,11 +6,16 @@
   <link rel="stylesheet" href="build/css/main.css">
 </head>
 <body>
+  <header>
+    <h1>Lets see</h1>
+  </header>
   <div id="docsContainer"></div>
 
-  <script id="docstpl" type="x-tmpl-mustache">
+  <script id="docstpl" type="text/x-handlebars-template">
     {{#Cats}}
-      <b>{{name}}</b>
+      <div class="item">
+        <a href="/{{name}}">{{name}}</a>
+        </div>
     {{/Cats}}
   </script>
 

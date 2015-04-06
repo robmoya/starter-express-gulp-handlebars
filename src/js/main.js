@@ -1,15 +1,15 @@
-var Mustache = require('./libs/mustache.js');
-
-console.log(Mustache);
+var Handlebars = require('handlebars');
 var data = require('./docs.json');
 
-function init(){
+console.log("")
 
-  var doctpl = document.getElementById("docstpl");
-  var template = doctpl.innerHTML;
-  var rendered = Mustache.render(template , data);
-  var docsContainer = document.getElementById("docsContainer");
-  docsContainer.innerHTML = rendered;
+function init(){
+  var template = document.getElementById("docstpl").innerHTML;
+  var render = Handlebars.compile(template);
+  var container = document.getElementById("docsContainer");
+
+  container.innerHTML = render(data);
+
 }
 
 init();

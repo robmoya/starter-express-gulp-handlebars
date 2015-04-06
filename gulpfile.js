@@ -1,5 +1,6 @@
 var browserify = require('browserify');
 var fs = require('fs');
+var express = require('express')
 var gulp = require('gulp');
 var uglify = require('gulp-uglify');
 var source = require('vinyl-source-stream');
@@ -24,14 +25,21 @@ var env = process.env.NODE_ENV || 'development';
 //Change Node environment to production to minify compiled index.js
 // var env = process.env.NODE_ENV || 'production';
 
+gulp.task('express', function(){
+  var app = express();
+  app.use(express.static(__dirname));
+  app.listen(3000);
+});
+
 
 gulp.task('js', function(){
   return browserify(jsPath,{debug: env === 'development'})
     .bundle()
-    .on('error', handleError)
     .pipe(source('index.js'))
+    .on('error', handleError)
     // .pipe(gulpif(env === 'production', streamify(uglify())))
     .pipe(gulp.dest(outputDir + '/js'));
+
 });
 
 
@@ -67,18 +75,4 @@ gulp.task('serve', ['sass','js'], function() {
 });
 
 
-// gulp.task('watch', function(){
-//
-//   gulp.watch('./src/js/**/*.js', ['js']);
-//   gulp.watch('./src/sass/**/*.scss', ['sass']);
-//   gulp.watch("./index.html").on('change', reload);
-// });
-
-
-// gulp.task("serve", function(){
-//   gulp.watch('./src/js/**/*.js', ['js']);
-//   gulp.watch('./src/sass/**/*.scss', ['sass']);
-//   gulp.watch("./index.html").on('change', reload);
-// });
-
-gulp.task('default', ['serve']);
+gulp.task('default', ['serve','express']);
